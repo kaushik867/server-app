@@ -1,0 +1,36 @@
+<app-loader *ngIf="loader.isLoading | async"></app-loader>
+<div *ngIf="!(loader.isLoading | async)">
+    <mat-card>
+        <mat-card-subtitle> <strong>Field MetaData</strong></mat-card-subtitle>
+        <ng-container *ngFor = "let field of data.fieldMetaData">
+            <mat-card>
+                <mat-card-subtitle>Field Name</mat-card-subtitle>
+                <mat-card-content> {{field.name}}</mat-card-content>
+            </mat-card>
+            <mat-card>
+                <mat-card-subtitle>global</mat-card-subtitle>
+                <mat-card-content> {{field.global}}</mat-card-content>
+            </mat-card>
+        </ng-container>
+    </mat-card>
+
+    <mat-card *ngIf="(data.portalMetaData | json) != '{}'">
+        <mat-card-subtitle><strong>Portal MetaData</strong></mat-card-subtitle>
+            <ng-container *ngFor="let item of data.portalMetaData | keyvalue">
+                <mat-card>
+                    <mat-card-subtitle>Portal Name</mat-card-subtitle>
+                    <mat-card-subtitle>{{item.key}}</mat-card-subtitle>
+                </mat-card>
+                <mat-card>
+                    <ng-container  *ngFor="let items of item.value">
+                        <mat-card-subtitle>Portal field</mat-card-subtitle>
+                        <mat-card-content>{{items.name}}</mat-card-content>
+                    </ng-container> 
+                </mat-card>
+                
+            </ng-container>
+    </mat-card>
+</div>
+
+<app-servererror *ngIf="error && !(loader.isLoading | async)" [errorText]='error' ></app-servererror>
+<app-notfound *ngIf="dataErr && data.fieldMetaData.length==0 && !(loader.isLoading | async)"></app-notfound>

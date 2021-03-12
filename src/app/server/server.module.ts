@@ -10,6 +10,7 @@ import { DatabaseinfoComponent } from './databaseinfo/databaseinfo.component';
 import { ScriptinfoComponent } from './scriptinfo/scriptinfo.component';
 import { ErrorModule } from '../error/error.module';
 import { LoaderComponent } from './loader/loader.component';
+import { LayoutComponent } from './layout/layout.component';
 
 
 
@@ -19,7 +20,8 @@ import { LoaderComponent } from './loader/loader.component';
     DbComponent,
     DatabaseinfoComponent,
     ScriptinfoComponent,
-    LoaderComponent
+    LoaderComponent,
+    LayoutComponent
   ],
   imports: [
     CommonModule,

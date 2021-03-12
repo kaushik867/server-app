@@ -4,10 +4,13 @@
         <mat-card-title>Layout present in {{db}}</mat-card-title>
     </mat-card>
     <div class="flex-container">
-        <ng-container *ngFor="let db of data">
+        <ng-container *ngFor="let layout of data">
             <mat-card>
-                <mat-card-subtitle><strong>{{db.name}}</strong></mat-card-subtitle>
+                <mat-card-subtitle><strong>{{layout.name}}</strong></mat-card-subtitle>
                 <img mat-card-image src="../../../assets/FileMaker_(app)_Logo.png">
+                <mat-card-actions>
+                    <a mat-raised-button color="primary" [routerLink]="['/db/layouts',db,layout.name]">More Info </a>
+                </mat-card-actions>
             </mat-card>
         </ng-container>
     </div>

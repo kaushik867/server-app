@@ -33,4 +33,9 @@ export class FmdbService {
     let headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get(`https://192.168.10.62/fmi/data/v1/databases/${dbName}/scripts`,{headers: headers});
   }
+
+  getLayoutMetadata(dbName,layout,token):Observable<any>{
+    let headers= new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`https://192.168.10.62/fmi/data/v1/databases/${dbName}/layouts/${layout}`, {headers: headers});
+  }
 }
