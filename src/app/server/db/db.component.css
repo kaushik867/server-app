@@ -1,0 +1,25 @@
+.card {
+    max-width: 400px;
+    height: 300px;
+}
+
+  .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  .flex-container mat-card{
+    width: 400px;
+    height: 200px;
+    margin-top: 20px;
+    margin-left: 10px;
+    text-align: center;
+  }
+.mat-card-image{
+    height: 80px;
+    width: 100px;
+}
+a{
+    text-decoration: none;
+}

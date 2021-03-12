@@ -1,0 +1,20 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1>
+                <h2>
+                    {{error.status}} Server Error </h2>
+                <div class="error-details">
+                <!-- Unfortunately we're having trouble loading the page you are looking for. Please come back in a while. -->
+                {{error.message}}
+                </div>
+                <div class="error-actions">
+                    <a  class="btn btn-primary btn-lg" [routerLink]="['']"><span class="glyphicon glyphicon-home"></span>
+                        Take Me Back </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

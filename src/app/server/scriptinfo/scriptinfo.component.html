@@ -1,0 +1,18 @@
+<app-loader *ngIf="loader.isLoading | async"></app-loader>
+<div *ngIf="!(loader.isLoading | async)">
+    <mat-card >
+        <mat-card-title>Layout present in {{dbName}}</mat-card-title>
+    </mat-card>
+    <div class="flex-container">
+        <ng-container *ngFor="let script of data">
+            <mat-card>
+                <mat-card-subtitle><strong>{{script.name}}</strong></mat-card-subtitle>
+                <mat-divider></mat-divider>
+                <img mat-card-image src="../../../assets/download.jpg">
+            </mat-card>
+        </ng-container>
+    </div>
+</div>
+
+<app-servererror *ngIf="error && !(loader.isLoading | async)" [errorText]='error' ></app-servererror>
+<app-notfound *ngIf="dataErr && data.length==0 && !(loader.isLoading | async)"></app-notfound>
