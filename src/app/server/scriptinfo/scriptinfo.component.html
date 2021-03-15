@@ -1,4 +1,10 @@
 <app-loader *ngIf="loader.isLoading | async"></app-loader>
+<form #searchForm="ngForm" class="form">
+    <mat-form-field class="full-width">
+        <mat-label>Search Database ...</mat-label>
+        <input matInput placeholder="Search Database ..." name="searchTerm" ngModel>
+    </mat-form-field> 
+</form> 
 <div *ngIf="!(loader.isLoading | async)">
     <mat-card >
         <mat-card-title>Layout present in {{dbName}}</mat-card-title>

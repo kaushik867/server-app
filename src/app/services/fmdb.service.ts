@@ -8,8 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class FmdbService {
 
-  // dbName: BehaviorSubject<string> = new BehaviorSubject<string>(null);
-  token: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  login: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   constructor(private http: HttpClient) { }
 
    

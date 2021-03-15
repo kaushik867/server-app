@@ -1,5 +1,13 @@
 <app-loader *ngIf="loader.isLoading | async"></app-loader>
-<div *ngIf="!(loader.isLoading | async)">
+
+<form #searchForm="ngForm" class="form">
+    <mat-form-field class="full-width">
+        <mat-label>Search Database ...</mat-label>
+        <input matInput placeholder="Search Database ..." name="searchTerm" ngModel>
+    </mat-form-field> 
+</form>  
+
+<div *ngIf="!(loader.isLoading | async)"> 
     <mat-card >
         <mat-card-title>Database list</mat-card-title>
     </mat-card>
@@ -12,8 +20,6 @@
                 <mat-card-actions>
                     <a mat-raised-button color="primary" [routerLink]="['/db/layouts',db.name]">layouts</a>
                     <a mat-raised-button color="primary" [routerLink]="['/db/scripts',db.name]">scripts</a>
-                    <a mat-raised-button color="primary" [routerLink]="['/db',db.name]">relationships</a>
-                    <a mat-raised-button color="primary" [routerLink]="['/db',db.name]">table</a>
                 </mat-card-actions>
             </mat-card>
         </ng-container>

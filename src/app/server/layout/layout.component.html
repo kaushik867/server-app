@@ -1,5 +1,5 @@
 <app-loader *ngIf="loader.isLoading | async"></app-loader>
-<div *ngIf="!(loader.isLoading | async)">
+<div *ngIf="!(loader.isLoading | async) && dataErr && !error">
     <mat-card>
         <mat-card-subtitle> <strong>Field MetaData</strong></mat-card-subtitle>
         <ng-container *ngFor = "let field of data.fieldMetaData">
@@ -33,4 +33,4 @@
 </div>
 
 <app-servererror *ngIf="error && !(loader.isLoading | async)" [errorText]='error' ></app-servererror>
-<app-notfound *ngIf="dataErr && data.fieldMetaData.length==0 && !(loader.isLoading | async)"></app-notfound>
+<app-notfound *ngIf="dataErr && data.length==0 && !(loader.isLoading | async)"></app-notfound>
