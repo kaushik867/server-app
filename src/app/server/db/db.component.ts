@@ -17,6 +17,7 @@ export class DbComponent implements OnInit, AfterViewInit {
   error: string = null;
   dataErr: boolean= false;
   subs:Subscription;
+  noAccessDb = ['kanzidata', 'leo'];
   @ViewChild('searchForm') searchForm: NgForm;
   constructor(private _http:FmdbService, public loader:LoaderService) { }
 
@@ -32,7 +33,7 @@ export class DbComponent implements OnInit, AfterViewInit {
     ).subscribe(data=>{
       let fdata=[];
       this.item.filter(res=>{
-       if(res.name.toLowerCase().includes(data.toLowerCase()))
+       if(data && res.name.toLowerCase().includes(data.toLowerCase()))
        {
          console.log(res);
          fdata.push(res);

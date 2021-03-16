@@ -28,6 +28,7 @@ export class LayoutComponent implements OnInit {
       mergeMap(res=> this.http.getLayoutMetadata(this.db, this.layout, res.response.token ))
     ).subscribe(data=>{
       this.data = data.response;
+      console.log(data);
       this.dataErr = true;
     },error=>{
       this.error = error;

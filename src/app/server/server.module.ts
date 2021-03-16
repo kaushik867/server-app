@@ -7,7 +7,6 @@ import { DbComponent } from './db/db.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { DatabaseinfoComponent } from './databaseinfo/databaseinfo.component';
-import { ScriptinfoComponent } from './scriptinfo/scriptinfo.component';
 import { ErrorModule } from '../error/error.module';
 import { LoaderComponent } from './loader/loader.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -19,7 +18,6 @@ import { LayoutComponent } from './layout/layout.component';
     LoginComponent,
     DbComponent,
     DatabaseinfoComponent,
-    ScriptinfoComponent,
     LoaderComponent,
     LayoutComponent
   ],

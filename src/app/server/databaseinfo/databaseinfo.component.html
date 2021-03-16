@@ -1,28 +1,37 @@
+
+<mat-card><strong>Layouts and Scripts present on {{db}}</strong></mat-card>
+
 <app-loader *ngIf="loader.isLoading | async"></app-loader>
 
-<form #searchForm="ngForm" class="form">
-    <mat-form-field class="full-width">
-        <mat-label>Search Database ...</mat-label>
-        <input matInput placeholder="Search Database ..." name="searchTerm" ngModel>
-    </mat-form-field> 
-</form> 
-
 <div *ngIf="!(loader.isLoading | async)">
-    <mat-card >
-        <mat-card-title>Layout present in {{db}}</mat-card-title>
-    </mat-card>
-    <div class="flex-container">
+    <mat-card class="container">
+        <mat-card-title>Layouts present in {{db}}</mat-card-title>
         <ng-container *ngFor="let layout of data">
             <mat-card>
-                <mat-card-subtitle><strong>{{layout.name}}</strong></mat-card-subtitle>
-                <img mat-card-image src="../../../assets/FileMaker_(app)_Logo.png">
-                <mat-card-actions>
-                    <a mat-raised-button color="primary" [routerLink]="['/db/layouts',db,layout.name]">More Info </a>
-                </mat-card-actions>
+                <a [routerLink]="['/db/layouts',db,layout.name]">
+                    <mat-card-subtitle><strong>{{layout.name}}</strong> <mat-icon class="float-right">arrow_forward_ios</mat-icon></mat-card-subtitle>
+                </a>
+                <mat-divider></mat-divider>
             </mat-card>
         </ng-container>
-    </div>
+    </mat-card>
+   
+    <mat-card class="container" *ngIf="(scData | json) != '[]' ; else nodata" >
+        <mat-card-title>Scripts present in {{db}}</mat-card-title>
+        <ng-container *ngFor="let script of scData">
+            <mat-card>
+                <mat-card-subtitle><strong>{{script.name}}</strong></mat-card-subtitle>
+                <mat-divider></mat-divider>
+            </mat-card>
+        </ng-container>
+    </mat-card>
+    <ng-template #nodata>
+        <mat-card class="container">
+            <mat-card-title>No script present on {{db}}</mat-card-title>
+        </mat-card>
+    </ng-template>
 </div>
 
+
 <app-servererror *ngIf="error && !(loader.isLoading | async)" [errorText]='error' ></app-servererror>
-<app-notfound *ngIf="dataErr && data.length==0 && !(loader.isLoading | async)"></app-notfound>
+<app-notfound *ngIf="dataErr && scDataErr && data.length==0 && !(loader.isLoading | async)"></app-notfound>

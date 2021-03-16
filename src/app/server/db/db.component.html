@@ -1,4 +1,4 @@
-<app-loader *ngIf="loader.isLoading | async"></app-loader>
+
 
 <form #searchForm="ngForm" class="form">
     <mat-form-field class="full-width">
@@ -7,20 +7,24 @@
     </mat-form-field> 
 </form>  
 
+<app-loader *ngIf="loader.isLoading | async"></app-loader>
+
 <div *ngIf="!(loader.isLoading | async)"> 
     <mat-card >
         <mat-card-title>Database list</mat-card-title>
     </mat-card>
     <div class="flex-container">
-        <ng-container *ngFor="let db of item">
+        <ng-container *ngFor="let db of item; let i= index">
             <mat-card>
-                <mat-card-subtitle><strong>{{db.name}}</strong></mat-card-subtitle>
+                <a [routerLink]="!(noAccessDb.includes(db.name.toLowerCase())) ? ['/db/info',db.name] : ['/db']" disabled>
+                    <mat-card-subtitle><strong>{{i+1}} . {{db.name}} <mat-icon class="float-right">arrow_forward_ios</mat-icon></strong></mat-card-subtitle>
+                    <span class="badge badge-danger" *ngIf="noAccessDb.includes(db.name.toLowerCase()) ; else access">No Access</span>
+                    <ng-template #access>
+                        <span class="badge badge-success" >Access</span>
+                    </ng-template>
+                   
+                </a>
                 <mat-divider></mat-divider>
-                <img mat-card-image src="../../../assets/FMP_icon.png">
-                <mat-card-actions>
-                    <a mat-raised-button color="primary" [routerLink]="['/db/layouts',db.name]">layouts</a>
-                    <a mat-raised-button color="primary" [routerLink]="['/db/scripts',db.name]">scripts</a>
-                </mat-card-actions>
             </mat-card>
         </ng-container>
     </div>

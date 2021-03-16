@@ -11,38 +11,20 @@ import { NgForm } from '@angular/forms';
   templateUrl: './databaseinfo.component.html',
   styleUrls: ['./databaseinfo.component.css']
 })
-export class DatabaseinfoComponent implements OnInit, AfterViewInit {
+export class DatabaseinfoComponent implements OnInit {
 
   db: string;
   data: Array<any> = [];
   error:any;
-  dataErr: boolean= false;
+  scData: Array<any> =[];
+  dataErr: boolean = false;
+  scDataErr: boolean = false;
   @ViewChild('searchForm') searchForm: NgForm;
   constructor(private route: ActivatedRoute, private http:FmdbService, public loader:LoaderService) { }
 
   ngOnInit(): void {
     this.db = this.route.snapshot.paramMap.get('database');
     this.loadData();
-  }
-
-  ngAfterViewInit(){
-    let formData = this.searchForm.valueChanges;
-
-    formData.pipe(
-      map(res=> res['searchTerm']),
-      distinctUntilChanged(),
-    ).subscribe(data=>{
-      let fdata=[];
-      this.data.filter(res=>{
-       if(res.name.toLowerCase().includes(data.toLowerCase())){
-        fdata.push(res);
-       }
-       if(!data){
-         this.loadData();
-       }
-      })
-      this.data = fdata;
-    })
   }
 
   loadData(){
@@ -54,6 +36,16 @@ export class DatabaseinfoComponent implements OnInit, AfterViewInit {
     }, error=>{
       this.error = error;
     })
+
+    this.http.getToken(this.db).pipe(
+      mergeMap(data=>this.http.getScripts(this.db, data.response.token))
+    ).subscribe(data=>{
+      this.scData = data.response.scripts;
+      this.scDataErr = true;
+    },error =>{
+      this.error = error;
+    })
+
   }
 
 }
